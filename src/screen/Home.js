@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Clipboard } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, ToastAndroid } from 'react-native';
 
 import Genrator from '../utilis/Genrator';
 import ClipBoard from '../lib/Clipboard';
@@ -29,14 +29,16 @@ class Home extends React.Component {
         this.setState({ data });
     }
 
-    copyPassword = () => {
-        console.log('done')
-        ClipBoard.copyText('Hello')
+    copyPassword = (data) => {
+        const copyText = data.password;
+        ToastAndroid.showWithGravity("Copied", ToastAndroid.SHORT, ToastAndroid.CENTER);
+        ClipBoard.copyText(copyText);
     }
 
     contentRow = ({ item, index }) => {
         return (
-            <TouchableOpacity key={index} style={styles.contentRow} onPress={this.copyPassword}>
+            <TouchableOpacity key={index} style={styles.contentRow}
+                onPress={() => this.copyPassword(item)}>
                 <Text style={styles.contentText}>{item.password}</Text>
             </TouchableOpacity>
         )

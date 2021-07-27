@@ -5,7 +5,6 @@ const clipBoard = {
         try {
             text.toStings();
             Clipboard.setString(text);
-            console.log('done')
             return null;
         } catch (error) {
             return error;
